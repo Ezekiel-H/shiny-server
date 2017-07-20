@@ -12,7 +12,7 @@ library(leaflet)
 
 # data -------------------------------
 
-map <- readOGR(dsn=path.expand("data"), layer="TA2017_")
+map <- readOGR(dsn=path.expand("Data//shapefile"), layer="TA2017_")
 
 
 wgs84 = '+proj=longlat +datum=WGS84'
