@@ -13,8 +13,7 @@ libs <- c("tidyverse", "lubridate", "RODBC", "sqldf", "openxl, rmasx", "sqldf", 
 lapply(libs, require, character.only = TRUE)
 
 ####### 
-  
-setwd("C:\\Users\\Ezekiel\\Google Drive\\R_stade_francis\\RUGBY")
+
   
 ####### Read in data
 joinner <- readRDS("playerprofile.rds")
