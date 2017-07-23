@@ -1,5 +1,5 @@
 
-libs <- c("tidyverse", "lubridate", "httr", "RCurl", "jsonlite", "readxl", "dplyr", "shiny", "rmarkdown", "knitr") #, "stringdist")
+libs <- c("tidyverse", "lubridate", "httr", "RCurl", "jsonlite", "readxlsx", "dplyr", "shiny", "rmarkdown", "knitr") #, "stringdist")
 lapply(libs, require, character.only = TRUE)
 
 ####### 
