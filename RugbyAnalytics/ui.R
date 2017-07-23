@@ -1,4 +1,5 @@
 library(shiny)
+library(dplyr)
 
 joinner <- readRDS("playerprofile.rds")
 totals <- readRDS("totals.rds")
