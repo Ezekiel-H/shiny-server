@@ -1,5 +1,7 @@
 library(shiny)
 
+joinner <- readRDS("playerprofile.rds")
+totals <- readRDS("totals.rds")
 
 shinyUI(fluidPage(theme = "bootstrap.css",
              
