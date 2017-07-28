@@ -13,7 +13,7 @@ libs <- c("tidyverse", "lubridate", "httr", "rea", "dplyr", "shiny", "rmarkdown"
 
 lapply(libs, require, character.only = TRUE)
 
-setwd("C:\\Users\\Ezekiel\\Desktop\\R\\StadeFranceRugby")
+#setwd("C:\\Users\\Ezekiel\\Desktop\\R\\StadeFranceRugby")
 
 stats <- readRDS("Stat.rds")
 
