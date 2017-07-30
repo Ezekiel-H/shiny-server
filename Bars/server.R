@@ -14,7 +14,7 @@ library(leaflet)
 
 setwd("/srv/shiny-server/Bars")
 
-map <- readOGR(dsn=path.expand("Data//shapefile"), layer="TA2017_")
+map <- readOGR(dsn=path.expand("data//Shapefiles"), layer="TA2017_")
 
 
 wgs84 = '+proj=longlat +datum=WGS84'
