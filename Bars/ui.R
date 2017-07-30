@@ -15,6 +15,8 @@ library(leaflet)
 
 shinyUI(fluidPage(theme = "bootstrap.css",
 
+tags$style(type="text/css", "div.info.legend.leaflet-control br {clear: both;}")                  
+                  
 fluidRow(
 column(12, align="center", offset =0,
 
@@ -38,7 +40,8 @@ selected = "Bars")
 )
 
 )),          
-
+ 
+                  
 mainPanel(
 
 fluidRow(column(12, align="center", offset =3,  
