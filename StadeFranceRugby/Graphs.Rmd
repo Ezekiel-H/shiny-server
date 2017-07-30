@@ -15,6 +15,8 @@ lapply(libs, require, character.only = TRUE)
 
 #setwd("C:\\Users\\Ezekiel\\Desktop\\R\\StadeFranceRugby")
 
+setwd("/srv/shiny-server/Bars")
+
 stats <- readRDS("Stat.rds")
 
 stats$Week[stats$Week == "Week1"] <- 1
