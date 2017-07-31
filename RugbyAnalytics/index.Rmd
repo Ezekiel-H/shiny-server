@@ -10,8 +10,17 @@ runtime: shiny
 
 ```{r setup, include=FALSE}
 
-libs <- c("tidyverse", "lubridate", "httr", "RCurl", "jsonlite", "readxl", "dplyr", "shiny", "rmarkdown", "knitr", "tibble") #, "stringdist")
-lapply(libs, require, character.only = TRUE)
+library(tidyverse)
+library(lubridate)
+library(httr)
+library(RCurl)
+library(jsonlite)
+library(readxl)
+library(dplyr)
+library(shiny)
+library(rmarkdown)
+library(knitr)
+library(tibble)
 
 locale <- Sys.setlocale(category = "LC_ALL", locale = "C") 
 
