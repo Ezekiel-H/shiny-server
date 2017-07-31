@@ -99,7 +99,7 @@ stade$Tackles[stade$Tackles == 0] <- NA
 combined <- bind_rows(top4, stade)
 
 
-tacklePercentage <- hchart(combined, "line", hcaes(x = Week, y = Tackles, group = Clubs, order = Week))
+tacklePercentage <- hchart(combined, "column", hcaes(x = Week, y = Tackles, group = Clubs, order = Week))
 
 ###
 
