@@ -22,8 +22,8 @@ library(tibble)
 
 
 ####### Read in data
-joinner <- readRDS("playerprofile.rds")
-totals <- readRDS("totals.rds")
+#joinner <- readRDS("playerprofile.rds")
+#totals <- readRDS("totals.rds")
 
 
 joinner <- joinner %>% filter(OnSite=="Y") 
@@ -32,3 +32,13 @@ joinner <- joinner %>% filter(OnSite=="Y")
 ```
 
 Hey you why dont I work???
+
+
+getwd()
+
+
+```{r}
+
+getwd()
+
+```
