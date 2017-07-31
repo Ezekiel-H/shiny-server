@@ -1,6 +1,7 @@
 ---
 output:
   html_document:
+    theme: journal
 title: "Rugby Analytics"
 
 ---
