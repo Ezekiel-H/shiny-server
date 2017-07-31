@@ -27,7 +27,8 @@ setwd("/srv/shiny-server/RugbyAnalytics")
 
 joinner <- readRDS(file = "playerprofile.rds")
 totals <- readRDS(file = "totals.rds")
-joinner <- joinner %>% filter(OnSite=="Y") 
+
+#joinner <- joinner %>% filter(OnSite=="Y") 
  
 
 ```
