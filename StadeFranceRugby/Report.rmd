@@ -9,8 +9,17 @@ output:
 ```{r setup, include=FALSE}
 ####### Required libs
 
-libs <- c("tidyverse", "lubridate", "RODBC", "sqldf", "openxl, rmasx", "sqldf", "httr", "RCurl", "jsonlite", "readxl", "dplyr", "shiny", "rmarkdown", "knitr") #, "stringdist")
-lapply(libs, require, character.only = TRUE)
+library(tidyverse)
+library(lubridate)
+library(httr)
+library(RCurl)
+library(jsonlite)
+library(readxl)
+library(dplyr)
+library(shiny)
+library(rmarkdown)
+library(knitr)
+library(tibble)
 
 ####### 
 
