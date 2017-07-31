@@ -22,6 +22,9 @@ library(rmarkdown)
 library(knitr)
 library(tibble)
 
+setwd("/srv/shiny-server/RugbyAnalytics")
+
+
 locale <- Sys.setlocale(category = "LC_ALL", locale = "C") 
 
 ####### 
