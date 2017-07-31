@@ -30,32 +30,32 @@ setwd("/srv/shiny-server/Bars")
 
 stats <- readRDS("Stat.rds")
 
-stats$Week[stats$Week == "Week1"] <- 1
-stats$Week[stats$Week == "Week2"] <- 2
-stats$Week[stats$Week == "Week3"] <- 3
-stats$Week[stats$Week == "Week4"] <- 4
-stats$Week[stats$Week == "Week5"] <- 5
-stats$Week[stats$Week == "Week6"] <- 6
-stats$Week[stats$Week == "Week7"] <- 7
-stats$Week[stats$Week == "Week8"] <- 8
-stats$Week[stats$Week == "Week9"] <- 9
-stats$Week[stats$Week == "Week10"] <- 10
-stats$Week[stats$Week == "Week11"] <- 11
-stats$Week[stats$Week == "Week12"] <- 12
-stats$Week[stats$Week == "Week13"] <- 13
-stats$Week[stats$Week == "Week14"] <- 14
-stats$Week[stats$Week == "Week15"] <- 15
-stats$Week[stats$Week == "Week16"] <- 16
-stats$Week[stats$Week == "Week17"] <- 17
-stats$Week[stats$Week == "Week18"] <- 18
-stats$Week[stats$Week == "Week19"] <- 19
-stats$Week[stats$Week == "Week20"] <- 20
-stats$Week[stats$Week == "Week21"] <- 21
-stats$Week[stats$Week == "Week22"] <- 22
-stats$Week[stats$Week == "Week23"] <- 23
-stats$Week[stats$Week == "Week24"] <- 24
-stats$Week[stats$Week == "Week25"] <- 25
-stats$Week[stats$Week == "Week26"] <- 26
+#stats$Week[stats$Week == "Week1"] <- 1
+#stats$Week[stats$Week == "Week2"] <- 2
+#stats$Week[stats$Week == "Week3"] <- 3
+#stats$Week[stats$Week == "Week4"] <- 4
+#stats$Week[stats$Week == "Week5"] <- 5
+#stats$Week[stats$Week == "Week6"] <- 6
+#stats$Week[stats$Week == "Week7"] <- 7
+#stats$Week[stats$Week == "Week8"] <- 8
+#stats$Week[stats$Week == "Week9"] <- 9
+#stats$Week[stats$Week == "Week10"] <- 10
+#stats$Week[stats$Week == "Week11"] <- 11
+#stats$Week[stats$Week == "Week12"] <- 12
+#stats$Week[stats$Week == "Week13"] <- 13
+#stats$Week[stats$Week == "Week14"] <- 14
+#stats$Week[stats$Week == "Week15"] <- 15
+#stats$Week[stats$Week == "Week16"] <- 16
+#stats$Week[stats$Week == "Week17"] <- 17
+#stats$Week[stats$Week == "Week18"] <- 18
+#stats$Week[stats$Week == "Week19"] <- 19
+#stats$Week[stats$Week == "Week20"] <- 20
+#stats$Week[stats$Week == "Week21"] <- 21
+#stats$Week[stats$Week == "Week22"] <- 22
+#stats$Week[stats$Week == "Week23"] <- 23
+#stats$Week[stats$Week == "Week24"] <- 24
+#stats$Week[stats$Week == "Week25"] <- 25
+#stats$Week[stats$Week == "Week26"] <- 26
 
 stats$Week <- as.integer(stats$Week)
 
