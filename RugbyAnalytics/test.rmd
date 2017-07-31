@@ -1,0 +1,19 @@
+---
+output:
+  html_document:
+title: "Rugby Analytics"
+
+---
+  
+  
+```{r setup, include=FALSE}
+library(dplyr)
+library(shiny)
+library(rmarkdown)
+library(knitr)
+
+
+
+```
+
+Hey you why dont I work???
