@@ -9,20 +9,20 @@ title: "Rugby Analytics"
   
 ```{r setup, include=FALSE}
 
-library(tidyverse)
-library(lubridate)
-library(httr)
-library(RCurl)
-library(jsonlite)
-library(readxl)
+#library(tidyverse)
+#library(lubridate)
+#library(httr)
+#library(RCurl)
+#library(jsonlite)
+#library(readxl)
 library(dplyr)
 library(shiny)
 library(rmarkdown)
 library(knitr)
-library(tibble)
-library(highcharter)
-library(ggplot2)
-library(readr)
+#library(tibble)
+#library(highcharter)
+#library(ggplot2)
+#library(readr)
 
 #setwd("C:\\Users\\Ezekiel\\Desktop\\R\\StadeFranceRugby")
 
@@ -57,7 +57,7 @@ setwd("/srv/shiny-server/Bars")
 #stats$Week[stats$Week == "Week25"] <- 25
 #stats$Week[stats$Week == "Week26"] <- 26
 
-stats$Week <- as.integer(stats$Week)
+#stats$Week <- as.integer(stats$Week)
 
 ```
 
