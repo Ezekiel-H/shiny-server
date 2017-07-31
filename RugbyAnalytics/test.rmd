@@ -26,7 +26,7 @@ library(tibble)
 #totals <- readRDS("totals.rds")
 
 
-joinner <- joinner %>% filter(OnSite=="Y") 
+#joinner <- joinner %>% filter(OnSite=="Y") 
  
 
 ```
