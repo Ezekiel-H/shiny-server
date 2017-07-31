@@ -28,7 +28,7 @@ library(readr)
 
 setwd("/srv/shiny-server/Bars")
 
-stats <- readRDS("Stat.rds")
+#stats <- readRDS("Stat.rds")
 
 #stats$Week[stats$Week == "Week1"] <- 1
 #stats$Week[stats$Week == "Week2"] <- 2
