@@ -22,7 +22,8 @@ library(tibble)
 library(highcharter)
 library(ggplot2)
 # 
-setwd("C:/Users/Ezekiel/Desktop/R/RugbyAnalytics")
+
+setwd("/srv/shiny-server/RugbyAnalytics")
 
 stats <- readRDS("Stat.rds")
 
