@@ -20,9 +20,13 @@ library(lubridate)
 library(httr)
 library(tibble)
 
+setwd("/srv/shiny-server/RugbyAnalytics")
 
 ####### Read in data
-#joinner <- readRDS("playerprofile.rds")
+#readRDS()
+joinner <- readRDS(file = "joinner.rds")
+
+
 #totals <- readRDS("totals.rds")
 
 
