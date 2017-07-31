@@ -41,6 +41,8 @@ getwd()
 
 ```{r}
 
+colnames(joinner)
+
 getwd()
 
 ```
