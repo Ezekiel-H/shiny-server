@@ -23,14 +23,11 @@ library(tibble)
 setwd("/srv/shiny-server/RugbyAnalytics")
 
 ####### Read in data
-#readRDS()
+
+
 joinner <- readRDS(file = "joinner.rds")
-
-
-#totals <- readRDS("totals.rds")
-
-
-#joinner <- joinner %>% filter(OnSite=="Y") 
+totals <- readRDS(file = "totals.rds")
+joinner <- joinner %>% filter(OnSite=="Y") 
  
 
 ```
