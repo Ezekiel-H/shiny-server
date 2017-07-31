@@ -22,18 +22,15 @@ library(rmarkdown)
 library(knitr)
 library(tibble)
 
-getwd()
-
-#setwd("/srv/shiny-server/RugbyAnalytics")
-
+setwd("/srv/shiny-server/RugbyAnalytics")
 
 locale <- Sys.setlocale(category = "LC_ALL", locale = "C") 
 
 ####### 
 
 ####### Read in data
-joinner <- readRDS("playerprofile.rds")
-totals <- readRDS("totals.rds")
+joinner <- readRDS(file = "playerprofile.rds")
+totals <- readRDS(file = "totals.rds")
 
 
 joinner <- joinner %>% filter(OnSite=="Y") 
