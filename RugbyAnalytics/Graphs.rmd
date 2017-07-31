@@ -7,7 +7,7 @@ title: "Rugby Analytics"
 ---
   
   
-```{r setup, include=FALSE}
+```{r setup, include=FALSE, warning=FALSE}
 library(tidyverse)
 library(lubridate)
 library(httr)
@@ -82,7 +82,7 @@ I grouped the top 4 La Rochelle, Toulon, Clermont, La Rochelle and took an avera
 
 
 
-```{r, echo = FALSE, fig.align="center"}
+```{r, echo = FALSE, fig.align="center", warning=FALSE}
 
 
 top4 <- stats %>% group_by(Week) %>% filter(Clubs %in% c("La Rochelle", "Toulon", "Clermont", "La Rochelle")) 
@@ -109,7 +109,7 @@ tacklePercentage
 
 This is the tackle percentage for Stade vs the top 4
 
-```{r, echo = FALSE, fig.align="center"}
+```{r, echo = FALSE, fig.align="center", warning=FALSE}
 
 top4 <- stats %>% group_by(Week) %>% filter(Clubs %in% c("La Rochelle", "Toulon", "Clermont", "La Rochelle")) 
 
