@@ -8,7 +8,7 @@ runtime: shiny
 ---
 
 
-```{r setup, include=FALSE}
+```{r setup}
 
 library(tidyverse)
 library(lubridate)
@@ -22,7 +22,9 @@ library(rmarkdown)
 library(knitr)
 library(tibble)
 
-setwd("/srv/shiny-server/RugbyAnalytics")
+getwd()
+
+#setwd("/srv/shiny-server/RugbyAnalytics")
 
 
 locale <- Sys.setlocale(category = "LC_ALL", locale = "C") 
