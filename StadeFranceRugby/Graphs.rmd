@@ -26,7 +26,7 @@ library(knitr)
 
 #setwd("C:\\Users\\Ezekiel\\Desktop\\R\\StadeFranceRugby")
 
-setwd("/srv/shiny-server/Bars")
+#setwd("/srv/shiny-server/Bars")
 
 #stats <- readRDS("Stat.rds")
 
@@ -63,15 +63,15 @@ setwd("/srv/shiny-server/Bars")
 
 
 
-<style type="text/css">
-  
-  h1.title {
-    font-size: 38px;
-    text-align: center;
-  }
-</br>
-  </style>
-  
+<!-- <style type="text/css"> -->
+
+<!--   h1.title { -->
+<!--     font-size: 38px; -->
+<!--     text-align: center; -->
+<!--   } -->
+<!-- </br> -->
+<!--   </style> -->
+
   
   This is using data from the [Top 14 Statistiques](http://www.lnr.fr/rugby-top-14/statistiques-rugby-top-14/) site which I scaped by week for the subheading 'Plaquages et ballon joues',      
 
@@ -164,4 +164,7 @@ This is the defensive tackle total for Stade vs the top 4
   <!-- ``` -->
   
   <!-- This is the offensive tackle total for Stade vs the top 4 -->
+  
+
+  
   
