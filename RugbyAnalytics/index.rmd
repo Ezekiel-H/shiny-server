@@ -32,7 +32,7 @@ locale <- Sys.setlocale(category = "LC_ALL", locale = "C")
 ####### Read in data
 joinner <- readRDS(file = "playerprofile.rds")
 totals <- readRDS(file = "totals.rds")
-
+MissedPercent <- as.data.frame(readRDS(file = "MissedPercentage.rds"))
 
 joinner <- joinner %>% filter(OnSite=="Y") 
  
@@ -196,22 +196,38 @@ t2
 <!-- knitr::kable(pictures, 'markdown', escape = FALSE) -->
 <!-- ``` -->
 
-```{r, echo = FALSE, fig.align='center'}
+```{r, echo=FALSE, warning=FALSE}
 
-target <- StadeFrancais %>% filter(Player == "Abdellatif Boutaty")target <- setNames(data.frame(t(target[,-1])), target[,1])names(target) <- paste("Name")target <- data.frame("Tackle Type"=rownames(target),target,row.names=NULL) %>% mutate(Group="Player")
-total <- StadeFrancais %>% filter(Player == "Total")total <- setNames(data.frame(t(total[,-1])), total[,1])names(total) <- paste("Name")total <- data.frame("Tackle Type"=rownames(total),total,row.names=NULL) %>% mutate(Group="Total")
-target <-bind_rows(target, total) 
-target$Name <- percent(target$Name, digits = 1)
 
-hchart(target, "column", hcaes(x=Tackle.Type, y=Name, group = "Group"))  %>%  hc_tooltip(sort = TRUE, table = TRUE, valueDecimals = 2) %>%   hc_yAxis(min = 0, max = 1)
+
+p2 <- renderHighchart({
+
+cols <- c('#f442eb', '#000033')
+target <- MissedPercent %>% filter(Player == paste(input$player))
+target <- setNames(data.frame(t(target[,-1])), target[,1])
+names(target) <- paste("Name")
+target <- data.frame("Tackle Type"=rownames(target),target,row.names=NULL) %>% mutate(Group="Player")
+total <- MissedPercent %>% filter(Player == "Total")
+total <- setNames(data.frame(t(total[,-1])), total[,1])
+names(total) <- paste("Name")
+total <- data.frame("Tackle Type"=rownames(total),total,row.names=NULL) %>% mutate(Group="Total")
+target <- bind_rows(target, total)
+
+
+  
+#target$Name <- percent(target$Name, digits = 1)
+
+hchart(target, "column", hcaes(x=Tackle.Type, y=Name, group = Group))%>%
+  hc_tooltip(sort = TRUE, table = TRUE, valueDecimals = 2) %>%
+  hc_yAxis(min = 0, max = 1) %>%
+  hc_colors(cols)
+
+
+})
+
+p2
 ```
 ***
 
 
 
-
-
-
-
-#cols <- c('#FF66FF', '#000033')
-#%>%  hc_colors(cols)
