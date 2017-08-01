@@ -21,7 +21,7 @@ library(knitr)
 library(tibble)
 library(highcharter)
 # 
-setwd("C:/Users/Ezekiel/Desktop/R/RugbyAnalytics")
+setwd("/srv/shiny-server/RugbyAnalytics")
 
 stats <- readRDS("Stat.rds")
 
