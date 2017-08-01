@@ -21,6 +21,7 @@ library(shiny)
 library(rmarkdown)
 library(knitr)
 library(tibble)
+library(highcharter)
 
 setwd("/srv/shiny-server/RugbyAnalytics")
 
@@ -195,5 +196,13 @@ t2
 <!-- knitr::kable(pictures, 'markdown', escape = FALSE) -->
 <!-- ``` -->
 
+```{r, echo = FALSE, fig.align='center'}
 
+target <- StadeFrancais %>% filter(Player == "Abdellatif Boutaty")target <- setNames(data.frame(t(target[,-1])), target[,1])names(target) <- paste("Name")target <- data.frame("Tackle Type"=rownames(target),target,row.names=NULL) %>% mutate(Group="Player")
+total <- StadeFrancais %>% filter(Player == "Total")total <- setNames(data.frame(t(total[,-1])), total[,1])names(total) <- paste("Name")total <- data.frame("Tackle Type"=rownames(total),total,row.names=NULL) %>% mutate(Group="Total")
+target <-bind_rows(target, total) 
+target$Name <- percent(target$Name, digits = 1)
+
+hchart(target, "column", hcaes(x=Tackle.Type, y=Name, group = "Group"))  %>%  hc_tooltip(sort = TRUE, table = TRUE, valueDecimals = 2) %>%   hc_yAxis(min = 0, max = 1)
+```
 ***
