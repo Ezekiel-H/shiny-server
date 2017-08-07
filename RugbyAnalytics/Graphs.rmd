@@ -23,7 +23,7 @@ library(highcharter)
 
 # srv/shiny-server/RugbyAnalytics
 
-setwd("srv/shiny-server/RugbyAnalytics")
+#setwd("srv/shiny-server/RugbyAnalytics")
 
 
 

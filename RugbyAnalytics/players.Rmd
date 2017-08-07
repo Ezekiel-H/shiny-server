@@ -51,7 +51,20 @@ h1.title {
 </br>
 </style>
 
+<center>
 
+```{r, echo = FALSE, fig.align="center"}
+                              
+selectInput("player", "Choose Player:",
+            
+            
+            
+            joinner %>% filter(!is.na(PreviousPlayer)) %>% select(Player))
+
+       
+```
+  
+</center>
 
 <center>
 <div class="row">
@@ -104,8 +117,8 @@ t1 <- renderTable({
 )},
                                     colnames=FALSE,
                                     rownames =FALSE,
-                                    width= "600px",
-                                    spacing= "l"
+                                    width= "600px"#,
+                                    #spacing= "l"
 )
 
 
@@ -140,20 +153,7 @@ t1
 <!--   </div> -->
 </div>
 </center>
-<center>
 
-```{r, echo = FALSE, fig.align="center"}
-                              
-selectInput("player", "Choose Player:",
-            
-            
-            
-            joinner %>% filter(!is.na(PreviousPlayer)) %>% select(Player))
-
-       
-```
-  
-</center>
 <center>
 
 ```{r, echo = FALSE, fig.align='center'}
