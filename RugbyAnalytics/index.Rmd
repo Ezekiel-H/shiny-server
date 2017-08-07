@@ -1,0 +1,12 @@
+---
+output:
+  html_document:
+    theme: journal
+title: "Rugby Analytics"
+runtime: shiny
+---
+  
+  
+[App1](https://ezekiel/shiny/RugbyAnalytics/playerprofile.rmd)
+
+[App2](https://ezekiel/shiny/RugbyAnalytics/graphs.html)
