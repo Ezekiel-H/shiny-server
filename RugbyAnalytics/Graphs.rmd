@@ -114,7 +114,7 @@ tacklePercentage
 
 This is the tackle percentage for Stade vs the top 4
 
-```{r, echo = FALSE, fig.align="center"}
+```{r, echo = FALSE, fig.align="center", warning=FALSE}
 
 top4 <- stats %>% group_by(Week) %>% filter(Clubs %in% c("La Rochelle", "Toulon", "Clermont", "La Rochelle")) 
 

@@ -8,4 +8,4 @@ title: "Rugby Analytics"
   
 [App1](http://ezekiel.nz/shiny/RugbyAnalytics/players.Rmd)
 
-[App2](http://ezekiel.nz/shiny/RugbyAnalytics/Graphs.Rmd)
+[App2](http://ezekiel.nz/shiny/RugbyAnalytics/Graphs.rmd)
