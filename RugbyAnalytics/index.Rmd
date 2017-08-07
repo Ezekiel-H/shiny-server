@@ -6,6 +6,6 @@ title: "Rugby Analytics"
 ---
   
   
-[App1](https://ezekiel/shiny/RugbyAnalytics/playerprofile.rmd)
+[App1](https://ezekiel/shiny/RugbyAnalytics/players.Rmd)
 
 [App2](https://ezekiel/shiny/RugbyAnalytics/graphs.html)
