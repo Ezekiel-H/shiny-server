@@ -20,8 +20,12 @@ library(rmarkdown)
 library(knitr)
 library(tibble)
 library(highcharter)
-# 
-#setwd("/srv/shiny-server/RugbyAnalytics")
+
+# srv/shiny-server/RugbyAnalytics
+
+setwd("srv/shiny-server/RugbyAnalytics")
+
+
 
 stats <- readRDS("Stat.rds")
 
