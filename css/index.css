@@ -30,7 +30,7 @@ margin-bottom: -10px;
 font-size: 70px;
 }
 #subtitle  {
-font-size: 45px;
+font-size: 45px !important;
 }
 #links {
 font-size: 20px;
@@ -112,7 +112,7 @@ margin: 0 auto;
 padding-top: 40px;
 }
 #portfolio-title {
-color: #615d6d;
+color: #615d6d !important;
   font-size: 34px;
 margin-bottom: 45px;
 cursor: pointer;
@@ -276,7 +276,8 @@ font-size: 28px;
   margin-bottom: -30px;
 }
 #subtitle {
-margin-left: 175px;
+margin-left: 175px !important;
+color: BLACK !important;
 }
 }
 @media only screen and (max-width: 750px) {
@@ -284,7 +285,8 @@ margin-left: 175px;
   font-size: 40px;
 }
 #subtitle {
-font-size: 30px;
+font-size: 30px !important;
+color: BLACK !important;
 }
 #titleBar {
 padding-bottom: 15px;
