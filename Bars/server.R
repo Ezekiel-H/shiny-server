@@ -12,7 +12,9 @@ library(leaflet)
 
 # data -------------------------------
 
-setwd("/srv/shiny-server/Bars")
+getwd()
+
+#setwd("~/Bars")
 
 map <- readOGR(dsn=path.expand("data//Shapefiles"), layer="TA2017_")
 
