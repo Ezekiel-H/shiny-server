@@ -16,7 +16,7 @@ library(RColorBrewer)
 
 options(stringsasfactors = FALSE)
 
-setwd("C:\\Users\\ehaggart001\\Desktop\\maps\\Maps3")
+
 
 
 ###-------------------------------Data-------------------------------###
@@ -27,7 +27,7 @@ totalvotes <- readRDS("totalvotes.RDS")
 
 
 ###-------------------------------Maps------------------------------###
-map <- readOGR(dsn=path.expand("Data\\shapefiles"), layer="Chchclip")
+map <- readOGR(dsn=path.expand("shapefiles"), layer="Chchclip")
 
 wgs84 = '+proj=longlat +datum=WGS84'
 map <- spTransform(map, CRS(wgs84))
