@@ -1,9 +1,15 @@
 
+library(rgdal)		
+library(spdplyr)		
+library(geojsonio)		
+library(rmapshaper)		
 library(leaflet)
-library(dplyr)
+library(tidyverse)
+library(ggforce)		
+library(scales)		
 library(shiny)
-
-
+library(RColorBrewer)
+library(plyr)
 
 # data -------------------------------
 
@@ -20,7 +26,7 @@ getwd()
 # partyvotes <- readRDS("partyvotes.RDS")
 # totalvotes <- readRDS("totalvotes.RDS")
 
-votes <- readRDS("shapefiles\\Data\\Votes.RDS")
+votes <- readRDS("shapefiles/data/Votes.RDS")
 
 ###-------------------------------Maps------------------------------###
 map <- readOGR(dsn=path.expand("shapefiles"), layer="Chchclip")

@@ -1,0 +1,10 @@
+name: ChristchurchElection
+title: ChristchurchElection
+account: ourbar
+server: shinyapps.io
+appId: 216372
+bundleId: 987335
+url: https://ourbar.shinyapps.io/ChristchurchElection/
+when: 1505803400.06203
+asMultiple: FALSE
+asStatic: FALSE
