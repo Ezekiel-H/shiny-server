@@ -6,10 +6,11 @@ library(rmapshaper)
 library(leaflet)
 library(tidyverse)
 library(ggforce)		
-library(scales)		
+#library(scales)		
 library(shiny)
-library(RColorBrewer)
+#library(RColorBrewer)
 library(plyr)
+
 
 # data -------------------------------
 
