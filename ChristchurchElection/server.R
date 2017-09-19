@@ -1,15 +1,9 @@
 
-library(rgdal)
-library(spdplyr)
-library(geojsonio)
-library(rmapshaper)
 library(leaflet)
 library(tidyverse)
-library(ggforce)
-library(scales)
 library(shiny)
-library(RColorBrewer)
-library(plyr)
+
+
 
 # data -------------------------------
 
