@@ -7,10 +7,10 @@
 library(leaflet)
 library(shiny)
 
-shinyUI(fluidPage(
+shinyUI(fillPage(
 
   # Application title
-  titlePanel("Old Faithful Geyser Data"),
+  # titlePanel("Old Faithful Geyser Data"),
 
   # Sidebar with a slider input for number of bins
 
@@ -18,19 +18,17 @@ shinyUI(fluidPage(
     # Show a plot of the generated distribution
 
       
-      mainPanel(
-        
-        fluidRow(column(12, align="center", offset =3,  
-                        leafletOutput("mymap", width = "100%", height = 400)
+
+        # fluidRow(column(12, align="center", 
+                        leafletOutput("mymap", height = "100%")
                        #  ,
                        # 
                        # 
                        # leafletOutput("othermap", width = "100%", height = 400)
 
-                       
- 
-))
-), #main pannel
+
+
+, #main pannel
 absolutePanel(top = 10, right = 10,
               
               
