@@ -17,7 +17,7 @@ library(plyr)
 
 options(stringsasfactors = FALSE)
 
-setwd("C:\\Users\\ehaggart001\\Desktop\\maps\\Maps3")
+getwd()
 
 
 ###-------------------------------Data-------------------------------###
@@ -26,16 +26,14 @@ setwd("C:\\Users\\ehaggart001\\Desktop\\maps\\Maps3")
 # partyvotes <- readRDS("partyvotes.RDS")
 # totalvotes <- readRDS("totalvotes.RDS")
 
-votes <- readRDS("Votes.RDS")
+votes <- readRDS("shapefiles\\Data\\Votes.RDS")
 
 ###-------------------------------Maps------------------------------###
-map <- readOGR(dsn=path.expand("Data\\shapefiles"), layer="Chchclip")
+map <- readOGR(dsn=path.expand("shapefiles"), layer="Chchclip")
 
 wgs84 = '+proj=longlat +datum=WGS84'
 map <- spTransform(map, CRS(wgs84))
 map <- map %>% filter(GED2014_NA != "Kaikoura")
-
-colnames(partyvotes)[1] <- "District"
 
 map$GED2014_NA <- revalue(map$GED2014_NA, c("Christchurch Central" = "Christchurch Central", "Christchurch East"="Christchurch East", "Port Hills"="Port Hills" ))
 
