@@ -9,6 +9,7 @@ library(ggforce)
 library(scales)
 library(shiny)
 library(RColorBrewer)
+library(plyr)
 
 # data -------------------------------
 
@@ -16,18 +17,19 @@ library(RColorBrewer)
 
 options(stringsasfactors = FALSE)
 
-
+setwd("C:\\Users\\ehaggart001\\Desktop\\maps\\Maps3")
 
 
 ###-------------------------------Data-------------------------------###
 
+# 
+# partyvotes <- readRDS("partyvotes.RDS")
+# totalvotes <- readRDS("totalvotes.RDS")
 
-partyvotes <- readRDS("partyvotes.RDS") 
-totalvotes <- readRDS("totalvotes.RDS")
-
+votes <- readRDS("Votes.RDS")
 
 ###-------------------------------Maps------------------------------###
-map <- readOGR(dsn=path.expand("shapefiles"), layer="Chchclip")
+map <- readOGR(dsn=path.expand("Data\\shapefiles"), layer="Chchclip")
 
 wgs84 = '+proj=longlat +datum=WGS84'
 map <- spTransform(map, CRS(wgs84))
@@ -38,15 +40,17 @@ colnames(partyvotes)[1] <- "District"
 map$GED2014_NA <- revalue(map$GED2014_NA, c("Christchurch Central" = "Christchurch Central", "Christchurch East"="Christchurch East", "Port Hills"="Port Hills" ))
 
 
-###-----------------------------cleaning----------------------------###
 
-partyvotes[, "Winner"] <- colnames(partyvotes[, 3:8])[apply(partyvotes[, 3:8], 1, which.max)]
+###-----------------------------cleaning----------------------------###
+# 
+# partyvotes[, "Winner"] <- colnames(partyvotes[, 3:8])[apply(partyvotes[, 3:8], 1, which.max)]
+# partyvotes[, "Winning Votes"] <- partyvotes[, 3:8][apply(partyvotes[, 3:8], 1, which.max)]
 
 map$District <- map$GED2014_NA
 
-map14 <- merge(x = map, y = (partyvotes %>% filter(Year == '2014')), by = "District")
-map11 <- merge(x = map, y = (partyvotes %>% filter(Year == '2011')), by = "District")
-map08 <- merge(x = map, y = (partyvotes %>% filter(Year == '2008')), by = "District")
+map14 <- merge(x = map, y = (votes %>% filter(Year == '2014')), by = "District")
+map11 <- merge(x = map, y = (votes %>% filter(Year == '2011')), by = "District")
+map08 <- merge(x = map, y = (votes %>% filter(Year == '2008')), by = "District")
 
 # functions --------------------------
 
@@ -66,32 +70,48 @@ shinyServer(function(input, output) {
     
     maplabels <- switch(input$var,
                         "PARTY VOTE" = sprintf(
-                          "<strong>%s</strong><br/>%s", 
-                          map$District, map$Winner
+                          "<strong>%s<br/>Winner %s</strong><br/>National %g<br/>Labour %g<br/>Act %g<br/>Green %g<br/>Maroi %g<br/>NZF %g", 
+                          map$District, map$Winner,map$`NATIONAL PARTY`, map$`LABOUR PARTY`, map$`ACT NEW ZEALAND`, map$`GREEN PARTY`, map$`MAORI PARTY`,map$`NEW ZEALAND FIRST PARTY`
                         ) %>% lapply(htmltools::HTML),
                         "ELECTORATE VOTE" = sprintf(
-                          "<strong>%s</strong><br/>%s", 
-                          map$District, map$Winner
+                          "<strong>%s</strong><br/>%s<br/>%s<br/>Margin %g votes", 
+                          map$District, map$`Electoral Winner`, map$`Electorate Candidate`, map$`Electoral Majority`
                         ) %>% lapply(htmltools::HTML))
     
     #switching between the input colour filters
     #switching between the legends
     
-    fill <- switch(input$var,
-                   "NATIONAL PARTY" = (map$`NATIONAL PARTY`),
-                   "LABOUR PARTY" = (map$`LABOUR PARTY`),
-                   "GREEN PARTY" = (map$`GREEN PARTY`))
+    #fill = map$`Winning Votes`
     
-    bins <- c(Inf, 1500, 1250, 1000, 750, 500, 250, 0)
-    pal <- colorBin("Blues", domain = map$`NATIONAL PARTY`, bins = bins, reverse = TRUE)
+    # fill <- switch(input$var,
+    #                "2008" = (map$`Winning Votes`),
+    #                "2008" = (map$`Winning Votes`),
+    #                "2008" = (map$`Winning Votes`))
+    # 
+    #bins <- c(Inf, 15000, 12500, 10000, 7500, 5000, 2500, 0)
+    pal <- switch(input$var,
+                  "PARTY VOTE" = colorFactor(
+                                              palette = map$colour,
+                                              domain = map$Winner
+                                              ),
+                  "ELECTORATE VOTE" = colorFactor(
+                                              palette = map$Ecolour,
+                                              domain = map$`Electoral Winner`
+                                              ))
+    colourdata <- switch(input$var,
+                  "PARTY VOTE" = map$colour,
+                  "ELECTORATE VOTE" = map$Ecolour
+                  )
+
+    
+    
     #mapping from leaflet
     
     leaflet(map) %>%
       addProviderTiles(providers$CartoDB.Positron) %>%
       addPolygons(color = "#444444", weight = 1, smoothFactor = 0.5,
                   opacity = 1.0, fillOpacity = 0.5,
-                  fillColor = ~pal(fill)
-                  ,
+                  fillColor = colourdata,
                   highlightOptions = highlightOptions(color = "white", weight = 2,
                                                       bringToFront = TRUE)
                   ,
@@ -99,11 +119,12 @@ shinyServer(function(input, output) {
                   labelOptions = labelOptions(
                     style = list("font-weight" = "normal", padding = "3px 8px"),
                     textsize = "15px",
-                    direction = "auto")) %>%
-      
-      addLegend(pal = pal, values = ~(fill), opacity = 0.7, title = "Persons per place",
-                position = "bottomright")
-    
+                    direction = "auto")) 
+    # %>%
+    # 
+    #   addLegend(pal = pal, values = ~(fill), opacity = 0.7, title = "Persons per place",
+    #             position = "bottomright")
+    # 
     
     # mappingdata ----------------------------
     
