@@ -15,9 +15,9 @@ getwd()
 
 ###-------------------------------Data-------------------------------###
 
-totalvotes <- readRDS("data\\totalvotes.RDS")
-Enrollment <- readRDS("data\\Enrollment.RDS")
-votes <- readRDS("data\\Votes.RDS")
+totalvotes <- readRDS("Widgets\\ChchElection\\data\\totalvotes.RDS")
+Enrollment <- readRDS("Widgets\\ChchElection\\data\\Enrollment.RDS")
+votes <- readRDS("Widgets\\ChchElection\\data\\Votes.RDS")
 
 #chart 1
 
@@ -123,4 +123,4 @@ chart3 <- hchart(x, "column", hcaes(x = District, y =`Electoral Majority`, fill 
             hc_title(text ="Winning Electoral Candidate Vote Margin")
 
 
-htmlwidgets::saveWidget(chart1, file = "chchelection_chart3.html", selfcontained = TRUE)
+htmlwidgets::saveWidget(chart3, file = "chchelection_chart3.html", selfcontained = TRUE)
