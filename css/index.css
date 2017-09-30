@@ -272,11 +272,11 @@ font-size: 28px;
 }
 @media only screen and (min-width: 751px) {
   #title {
-  margin-left: -175px;
+  margin-left: -0px;
   margin-bottom: -30px;
 }
 #subtitle {
-margin-left: 175px !important;
+margin-left: 0px !important;
 color: BLACK !important;
 }
 }
@@ -285,7 +285,7 @@ color: BLACK !important;
   font-size: 40px;
 }
 #subtitle {
-font-size: 30px !important;
+font-size: 20px !important;
 color: BLACK !important;
 }
 #titleBar {
