@@ -2,7 +2,7 @@
 output:
   
   html_document:
-    title: "Comparison Defence Analytics"
+title: "Comparison Defence Analytics"
 runtime: shiny
 
 ---
@@ -119,7 +119,11 @@ cols <- c('#f442eb' , '#00008B')
   
   
   
-  
+Select A player from Stade Francis on the left drop down to compare the number of defensive stats with a player on the right drop down which includes all players in T14 and European Cup that have played this year.
+
+
+***
+
   
 <div class="row">
   <div class="col-md-6">
