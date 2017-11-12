@@ -169,10 +169,11 @@ t2 <- renderTable({
 ,
                                     colnames=FALSE,
                                     rownames =TRUE
+                                    
+
                                     #width= "600px"#,
                                     #spacing= "l"
 )
-
 
 t2
 ```
@@ -243,7 +244,7 @@ pt4 <- renderHighchart({
 target <- stadeplayertotals %>% filter(Names == paste(input$player))
 
 highchart() %>%
-
+              hc_xAxis(categories = target$PositionGroup) %>% 
               hc_add_series(name = "Tackles", data = target$TacklesWeighted, type = "column") %>%
               hc_add_series(name = "Team Average", data = target$TacklesPerMin.TeamAverage, type = "column") %>%
               hc_add_series(name = "Competition Average", data = target$TacklesPerMin.CompetitionAverage, type = "column") %>%
@@ -332,7 +333,7 @@ target <- stadeplayertotals %>% filter(Names == paste(input$player))
 target <- stadeplayertotals %>% filter(Names == paste(input$player))
 
 highchart() %>%
-
+              hc_xAxis(categories = target$PositionGroup) %>% 
               hc_add_series(name = "Tackles", data = target$TacklePercentage, type = "column") %>%
               hc_add_series(name = "Team Average", data = target$TacklePercentage.TeamAverage, type = "column") %>%
               hc_add_series(name = "Competition Average", data = target$TacklePercentage.CompetitionAverage, type = "column") %>%
@@ -420,7 +421,7 @@ target <- stadeplayertotals %>% filter(Names == paste(input$player))
 target <- stadeplayertotals %>% filter(Names == paste(input$player))
 
 highchart() %>%
-
+              hc_xAxis(categories = target$PositionGroup) %>% 
               hc_add_series(name = "Tackles", data = target$Tackles, type = "column") %>%
               hc_add_series(name = "Team Average", data = target$Tackles.TeamAverage, type = "column") %>%
               hc_add_series(name = "Competition Average", data = target$Tackles.CompetitionAverage, type = "column") %>%
