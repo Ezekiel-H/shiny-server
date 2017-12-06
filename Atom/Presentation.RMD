@@ -26,7 +26,7 @@ getwd()
 
 
 
-Working freelance for Stade Francis I was able to solve a problem they didn't know they had. Delivering quaity analytics that helped drive insight and critical understanding. 
+Working freelance for Stade Francais I was able to solve a problem they didn't know they had. Delivering quality analytics that helped drive insight and critical understanding. 
 
 The communication of this insight represented for me a colmination of my ability to assess critically and deliver thoughtful insight.
 <div class="centered">
@@ -66,18 +66,18 @@ m  # Print the map
 </div>
 ## Introduction
 
-Stade Francis is a Paris rugby team in the Top 14 French competition. My father is a defence coach with a background in the NZ rugby system which is: 
+Stade Francais is a Paris rugby team in the Top 14 French competition. My father is a defence coach with a background in the NZ rugby system which is: 
 
-- High achieving, 
+- High achieving 
 - Embracing of change
-- Market leading. 
+- Market leading 
 
-The French team wants sucess without change> They rely on outdated tech and intuion to deliver insight and understanding.
+The French team wants sucess without change. They rely on outdated tech and intuition to deliver insight and understanding.
 
 
 ## Background
 
-###Why is this my greatest Achievement?
+###Why is this my greatest achievement?
 
 - Personal connection
 - Culmination of my experience
@@ -89,7 +89,7 @@ The French team wants sucess without change> They rely on outdated tech and intu
 ### Was there a problem that needed an analytic solution?
 
 - Technical/data literacy
-- Reasource restrictions
+- Resource restrictions
 - Bureaucracy and fear of change
 
 
@@ -120,24 +120,25 @@ knitr::include_graphics("Assets/2.jpg")
 <iframe class="chart" src="https://ezekiel.nz/shiny/RugbyAnalytics/players.Rmd" width="800"   height="550" style="border: none;"></iframe>
 
 ## Feedback and self evaluation
-### I needed to improve on what I had delivered to meet requirements 
+### I needed to improve on what I had delivered 
 
-- Comparing Apples and oranges?
+- Comparing Apples and oranges
 - Poor layout and outdated data
 - Limited scope for interperatation
 
 ## Presentation and value added
 
 
-<iframe class="chart" src="https://ezekiel.nz/shiny/Stade/defence.Rmd" width="800"   height="550" style="border: none;"></iframe>
+<iframe class="chart" src="https://ezekiel.nz/shiny/Stade/defence.Rmd" width="800"   height="550" zoom: "0.75" style="border: none;"></iframe>
+
 
 ## Conclusion
-### What did I learn and what did I achieve
+### What did I learn and what did I achieve?
 
 - Communicated through a number of analytics actionable insights 
-- Allowed a better avenue for non technical audience to engage with data
+- Created avenue for non technical audience to engage with data
 - Used knowledge of data/development techniques in new data type
-- Replicable analysis that can be used to design player KPIs
+- Replicable analysis that can be used to design player KPI's - IP
 
 
 ##
