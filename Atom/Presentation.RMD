@@ -16,12 +16,6 @@ library(leaflet)
 locale <- Sys.setlocale(category = "LC_ALL", locale = "C") 
 ```
 
-##a
-```{r}
-getwd()
-
-```
-
 ## Solving a problem no one saw
 
 
@@ -96,28 +90,28 @@ The French team wants sucess without change. They rely on outdated tech and intu
 ## Examples of challenges faced
 
 ```{r, out.width = "800px"}
-knitr::include_graphics("/Assets/abc.jpg")
+knitr::include_graphics("./Assets/abc.jpg")
 ```
 
 
 ## Examples of challenges faced
 
 ```{r, out.width = "800px"}
-knitr::include_graphics("Assets/3.jpg")
+knitr::include_graphics("./Assets/3.jpg")
 ```
 
 
 ## Examples of challenges faced
 
 ```{r, out.width = "800px"}
-knitr::include_graphics("Assets/2.jpg")
+knitr::include_graphics("./Assets/2.jpg")
 ```
 
 
 ## Execution
 
 
-<iframe class="chart" src="https://ezekiel.nz/shiny/RugbyAnalytics/players.Rmd" width="800"   height="550" style="border: none;"></iframe>
+<iframe class="chart" src="https://ezekiel.nz/shiny/RugbyAnalytics/players.Rmd" style="border: none;"></iframe>
 
 ## Feedback and self evaluation
 ### I needed to improve on what I had delivered 
