@@ -1,0 +1,45 @@
+---
+title: "Presentation"
+output:
+  ioslides_presentation: default
+  slidy_presentation: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## R Markdown
+
+This is an R Markdown presentation. I made quickly for you Rhionon so as to let you see how it works before our call later
+
+
+## Slide with Bullets
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+## Slide with a leaflet map
+
+```{r, warning=FALSE,echo = FALSE}
+library(leaflet)
+m <- leaflet() %>%
+  addTiles() %>%  # Add default OpenStreetMap map tiles
+  addMarkers(lng=-0.276, lat=51.152, label="Atom Group")
+m  # Print the map
+
+
+```
+
+## Slide with an interactive plot
+
+```{r,  pressure}
+plot(pressure)
+```
+
+## Iframe slide
+
+
+<iframe class="chart" src="https://ezekiel.nz/shiny/Widgets/BTC/BTCExchange.html" width="750"   height="550" style="border: none;"></iframe>
+
