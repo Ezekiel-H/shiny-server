@@ -16,6 +16,12 @@ library(leaflet)
 locale <- Sys.setlocale(category = "LC_ALL", locale = "C") 
 ```
 
+##a
+```{r}
+getwd()
+
+```
+
 ## Solving a problem no one saw
 
 
@@ -26,7 +32,7 @@ The communication of this insight represented for me a colmination of my ability
 <div class="centered">
 
 
-```{r, out.width = "300px"}
+```{html, out.width = "300px"}
 knitr::include_graphics(".Atom//Assets/stade.jpg")
 ```
 
