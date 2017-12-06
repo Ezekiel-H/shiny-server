@@ -32,8 +32,10 @@ The communication of this insight represented for me a colmination of my ability
 <div class="centered">
 
 
-```{html, out.width = "300px"}
-knitr::include_graphics(".Atom//Assets/stade.jpg")
+```{r, out.width = "300px"}
+
+knitr::include_graphics(".Atom/Assets/stade.jpg")
+
 ```
 
 
@@ -94,21 +96,21 @@ The French team wants sucess without change> They rely on outdated tech and intu
 ## Examples of challenges faced
 
 ```{r, out.width = "800px"}
-knitr::include_graphics("./Assets/abc.jpg")
+knitr::include_graphics("Assets/abc.jpg")
 ```
 
 
 ## Examples of challenges faced
 
 ```{r, out.width = "800px"}
-knitr::include_graphics("./Assets/3.jpg")
+knitr::include_graphics("Assets/3.jpg")
 ```
 
 
 ## Examples of challenges faced
 
 ```{r, out.width = "800px"}
-knitr::include_graphics("./Assets/2.jpg")
+knitr::include_graphics("Assets/2.jpg")
 ```
 
 
