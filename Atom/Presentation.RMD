@@ -1,5 +1,6 @@
 ---
 title: "My Greatest Achievement"
+subtitle: "A presentation by Ezekiel Haggart"
 output:
   ioslides_presentation: default
   slidy_presentation: default
@@ -11,6 +12,7 @@ knitr::opts_chunk$set(echo = FALSE) #, fig.width=8, fig.height=4.5, dpi=300, out
 library(dplyr)
 library(highcharter)
 
+locale <- Sys.setlocale(category = "LC_ALL", locale = "C") 
 ```
 
 ## Solving a problem no one saw
