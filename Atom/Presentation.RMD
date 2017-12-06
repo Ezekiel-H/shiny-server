@@ -34,7 +34,7 @@ The communication of this insight represented for me a colmination of my ability
 
 ```{r, out.width = "300px"}
 
-knitr::include_graphics(".Atom/Assets/stade.jpg")
+knitr::include_graphics("./Assets/stade.jpg")
 
 ```
 
@@ -96,7 +96,7 @@ The French team wants sucess without change> They rely on outdated tech and intu
 ## Examples of challenges faced
 
 ```{r, out.width = "800px"}
-knitr::include_graphics("Assets/abc.jpg")
+knitr::include_graphics("/Assets/abc.jpg")
 ```
 
 
