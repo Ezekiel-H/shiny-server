@@ -11,6 +11,7 @@ output:
 knitr::opts_chunk$set(echo = FALSE) #, fig.width=8, fig.height=4.5, dpi=300, out.width="1920px", out.height="1080px")
 library(dplyr)
 library(highcharter)
+library(leaflet)
 
 locale <- Sys.setlocale(category = "LC_ALL", locale = "C") 
 ```
@@ -26,7 +27,7 @@ The communication of this insight represented for me a colmination of my ability
 
 
 ```{r, out.width = "300px"}
-knitr::include_graphics("./Assets/stade.jpg")
+knitr::include_graphics(".Atom//Assets/stade.jpg")
 ```
 
 
@@ -35,6 +36,7 @@ knitr::include_graphics("./Assets/stade.jpg")
 
 ## Quick overview of the presentation
 <div class="columns-2">
+
 - Introduction
 - Background
 - Understanding the problem
@@ -44,7 +46,7 @@ knitr::include_graphics("./Assets/stade.jpg")
 - Conclusion
 
 ```{r, warning=FALSE,echo = FALSE, out.width = "300px", out.height= "350px"}
-library(leaflet)
+
 m <- leaflet() %>%
   addTiles() %>%  # Add default OpenStreetMap map tiles
   addMarkers(lng=-0.276, lat=51.152, label="We are here at the Atom Group headquarters")
@@ -57,9 +59,11 @@ m  # Print the map
 ## Introduction
 
 Stade Francis is a Paris rugby team in the Top 14 French competition. My father is a defence coach with a background in the NZ rugby system which is: 
--high achieving, 
--embracing of change
--market leading. 
+
+- High achieving, 
+- Embracing of change
+- Market leading. 
+
 The French team wants sucess without change> They rely on outdated tech and intuion to deliver insight and understanding.
 
 
@@ -132,8 +136,6 @@ knitr::include_graphics("./Assets/2.jpg")
 ### Why use render markdown?
 
 ```{r, warning=FALSE,echo = TRUE, out.width = "800px", out.height= "200px"}
-
-library(leaflet)
 
 m <- leaflet() %>%
   addTiles() %>%  
