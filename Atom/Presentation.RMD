@@ -90,21 +90,21 @@ The French team wants sucess without change. They rely on outdated tech and intu
 ## Examples of challenges faced
 
 ```{r, out.width = "800px"}
-knitr::include_graphics("./Assets/abc.jpg")
+knitr::include_graphics("./Assets/abc.JPG")
 ```
 
 
 ## Examples of challenges faced
 
 ```{r, out.width = "800px"}
-knitr::include_graphics("./Assets/3.jpg")
+knitr::include_graphics("./Assets/3.JPG")
 ```
 
 
 ## Examples of challenges faced
 
 ```{r, out.width = "800px"}
-knitr::include_graphics("./Assets/2.jpg")
+knitr::include_graphics("./Assets/2.JPG")
 ```
 
 
