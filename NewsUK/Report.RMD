@@ -1,0 +1,205 @@
+---
+title: "Presentation"
+output: html_notebook
+---
+
+```{r, setup, include=FALSE}
+library(dplyr)
+library(readxl)
+library(highcharter)
+library(lubridate)
+library(reshape2)
+library(htmlwidgets)
+library(googleVis)
+
+options(stringsAsFactors = FALSE)
+
+Data <- read_excel("C:/Users/Ezekiel/Desktop/R/shiny-server/NewsUK/Assets/Churn Data Task.xlsx")
+
+Data <- Data %>% mutate(year = year(contract_start_date))
+# 
+# Male <- Data %>% filter(gender == "M") %>% na.omit()
+# Female <- Data %>% filter(gender == "F") %>% na.omit()
+#   
+
+dateset <- as.data.frame(round_date(seq(ISOdate(2008,1,1), ISOdate(2017,1,1), "day"), unit = "days"))
+names(dateset) <- 'DateBase'
+dateset <- rbind(dateset, '9999-12-31')
+```
+
+
+
+```{r, echo=FALSE}
+
+hchart(Male$age, area = TRUE) %>%
+  hc_add_series(Female$age, area = TRUE)
+
+hcdensity(Male$age) %>%
+  hc_add_series_density(Female$age, area = TRUE)
+
+
+```
+
+
+
+
+```{r, echo=FALSE}
+
+x<- as.data.frame(Data %>% group_by(title) %>%
+   count())
+  
+x <- top_n(x, 10, n)
+
+Graph <- Data %>%
+  filter(title %in% print(x$title)) %>%
+  select(title, sub_status_code) %>%
+  group_by(title, sub_status_code) %>%
+  count()
+
+Graph <- Graph[c(2,1,3)]
+
+
+z <- gvisSankey(Graph, from = 'sub_status_code', to = 'title',
+                 options = list(height = 800, width = "automatic",
+                            tooltip = "{isHtml:'True'}",
+                            sankey =  "{link: { colorMode: 'target' },
+                                           node: { colors: ['#1A237E',
+                                                            '#1B5E20',
+                                                            '#a6cee3',
+                                                            '#b2df8a',
+                                                            '#fb9a99',
+                                                            '#fdbf6f',
+                                                            '#cab2d6', 
+                                                            '#ffff99', 
+                                                            '#1f78b4', 
+                                                            '#33a02c'
+                                                            ],
+                                                   label: { fontSize: 10, bold: true }
+                                                  },
+                                           iterations: 0
+                                      }"))
+
+
+
+plot(z)
+
+z$html$chart
+
+cat(z$html$chart, file="NewsUK_snakey.html")
+
+
+
+
+```
+
+
+
+
+```{r}
+
+Dates1 <- as.data.frame(Data %>% group_by(contract_start_date, `Contract Status Grouped`) %>%
+  count(contract_start_date))
+names(Dates1) <- c('DateBase', 'Status','Start')
+
+Dates2 <- as.data.frame(Data %>%  group_by(contract_end_date, `Contract Status Grouped`) %>%
+  count(contract_end_date))
+names(Dates2) <- c('DateBase', 'Status', 'End')
+
+
+Dates <- left_join(dateset, Dates1)
+Dates <- left_join(Dates, Dates2)
+
+Dates[is.na(Dates)] <- 0
+
+
+#Active <- Dates %>% filter(Status == "Active")
+
+
+
+Dates <- Dates %>% mutate(cumsum(Start))
+Dates <- Dates %>% mutate(cumsum(End))
+Dates <- Dates %>% mutate(Active= cumsum(Start) - cumsum(End))
+
+#DatesMelt <- melt(Dates, id.vars = "DateBase", measure.vars = c("cumsum(Start)", "cumsum(End)"))
+
+# 
+#   
+# hc1 <- highchart() %>%
+#   hc_xAxis(categories = Active$DateBase) %>%
+#   hc_add_series(name = "Tokyo", Active = Active$Start, type = "area") %>%
+#   hc_add_series(name = "ABC", Active = Active$End,type = "area") %>%
+#    hc_plotOptions(column = list(
+#     dataLabels = list(enabled = FALSE),
+#     stacking = "normal",
+#     enableMouseTracking = TRUE)
+#   ) 
+# 
+# 
+# hc1
+# 
+# 
+
+Graph <- Dates %>% filter(DateBase > "2015-1-1" & DateBase < "2017-12-31")
+  
+hc1 <- highchart() %>%
+  #hc_xAxis(categories = Graph$DateBase, type = 'datetime',labels = list(format = '{value:%Y %m}')) %>% 
+  hc_xAxis(categories = Graph$DateBase, type = 'datetime',labels = list(format = '{value:%Y %b}')) %>%
+  hc_add_series(name = "Tokyo", data = Graph$`cumsum(Start)`, type = "area") %>%
+  hc_add_series(name = "ABC", data = Graph$`cumsum(End)`,type = "area") %>%
+  hc_add_series(name = "Active", data = Graph$Active) %>%
+  
+   hc_plotOptions(column = list(
+    dataLabels = list(enabled = FALSE),
+    stacking = "normal",
+    enableMouseTracking = TRUE)
+  ) 
+
+
+hc1
+
+### this is the 1st graph for the presentation
+
+```
+
+
+
+
+
+
+
+
+
+
+```{r}
+
+### this is the graph for price graph 2 on the presentation
+
+Dates1 <- as.data.frame(Data %>% group_by(contract_start_date) %>%
+                          summarise(median = median(annual_monthly_full_cost, na.rm = TRUE),
+                                    LQ=quantile(annual_monthly_full_cost, probs=0.25, na.rm = TRUE),
+                                    `50%`=quantile(annual_monthly_full_cost, probs=0.5, na.rm = TRUE),
+                                    UQ=as.numeric(quantile(annual_monthly_full_cost, probs=0.75, na.rm = TRUE)),
+                                    avg=mean(annual_monthly_full_cost, na.rm = TRUE), n = n()))
+
+
+names(Dates1) <- c('DateBase', 'median','LQ', '50%', 'UQ', 'Average', 'n')
+
+
+
+Dates1 <- Dates1 %>% mutate(RunningMedian = round(cummean(median), 2),
+                            `25%` = round(cummean(LQ), 2),
+                            `75%` = round(cummean(UQ), 2)
+                            ) %>% filter(DateBase > '2015-01-01')
+
+hc2 <- highchart() %>%
+  hc_xAxis(categories = Dates1$DateBase, type = 'datetime',labels = list(format = '{value:%Y %m}')) %>% 
+  hc_add_series(name = "Weighted Median Subscription Price", data = Dates1$RunningMedian) %>%
+  hc_add_series(name = "Weighted Lower Quantile Subscription Price", data = Dates1$`25%`) %>%
+  hc_add_series(name = "Weighted Upper Quantile Subscription Price", data = Dates1$`75%`) %>%
+  hc_tooltip(sort = TRUE, table = TRUE, valueDecimals = 2)
+
+
+hc2
+
+```
+
