@@ -1,0 +1,131 @@
+---
+title: "Presentation"
+author: "Ezekiel Haggart"
+date: "10 December 2017"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(highcharter)
+library(dplyr)
+```
+
+## Introduction to the dataset
+
+
+## Active users 2015 - today
+```{r}
+
+Graph <- readRDS("Graph1.RDS")
+
+hc1 <- highchart() %>%
+  #hc_xAxis(categories = Graph$DateBase, type = 'datetime',labels = list(format = '{value:%Y %m}')) %>% 
+  hc_xAxis(categories = Graph$DateBase, type = 'datetime',labels = list(format = '{value:%Y %m}')) %>%
+  hc_add_series(name = "Total Users", data = Graph$`cumsum(Start)`, type = "area") %>%
+  hc_add_series(name = "Non Active Users", data = Graph$`cumsum(End)`,type = "area") %>%
+  hc_add_series(name = "Active Users", data = Graph$Active) %>%
+  hc_tooltip(sort = TRUE, table = TRUE, valueDecimals = 2) %>%
+  hc_plotOptions(column = list(
+    dataLabels = list(enabled = FALSE),
+    stacking = "normal",
+    enableMouseTracking = TRUE)
+  ) 
+
+
+hc1
+
+
+```
+
+
+## Subscriptions as a Business 
+
+
+```{r}
+
+Dates1 <- readRDS("Graph2.RDS")
+
+hc2 <- highchart() %>%
+  hc_xAxis(categories = Dates1$DateBase, type = 'datetime',labels = list(format = '{value:%Y %m}')) %>% 
+  hc_add_series(name = "Weighted Median Subscription Price", data = Dates1$RunningMedian) %>%
+  hc_add_series(name = "Weighted Lower Quantile Subscription Price", data = Dates1$`25%`) %>%
+  hc_add_series(name = "Weighted Upper Quantile Subscription Price", data = Dates1$`75%`) %>%
+  hc_tooltip(sort = TRUE, table = TRUE, valueDecimals = 2)
+
+
+hc2
+
+```
+
+
+
+## Age distribution
+
+
+```{r}
+
+Graph <- readRDS("Graph3.RDS")
+
+highchart() %>%
+  hc_xAxis(plotBands = list(
+             list(from = 36, to = 58, color = "rgba(100, 0, 0, 0.1)",
+                  label = list(text = "Long term average")))) %>% 
+  hc_add_series(density(Graph$age), type = "area", name = "Age Distribution") %>%
+  # hc_add_series(density(Graph2$age), type = "area", name = "Male Age Distribution") %>%
+  hc_tooltip(crosshairs = TRUE, pointFormat = "<br> <b>{point.x:.0f} Years old</b>  <br> {point.y:.2f}%")
+
+
+```
+
+
+## Gender Breakdown
+
+
+```{r}
+
+Graph <- readRDS("Graph4.RDS")
+
+highchart() %>% 
+  hc_add_series_labels_values(Graph$gender, Graph$freq, name = "Pie",colorByPoint = TRUE, type = "pie") %>%
+  hc_colors(c("#FF69B4", "#69b4ff","00000")) %>%
+  hc_tooltip(crosshairs = TRUE, pointFormat = "<b>{point.y:.2f}%")
+
+
+```
+
+
+
+## 
+###Top 10 products and retention flows
+
+<iframe class="chart" src="https://ezekiel.nz/shiny/Widgets/Presentation/NewsUK_snakey.html" style="border: none;"></iframe>
+
+##
+### Splitting key 
+
+<iframe class="chart" src="https://ezekiel.nz/shiny/Widgets/Presentation/NewsUK_snakey2.html" style="border: none;"></iframe>
+
+## checking demographics
+
+
+## Conclusion
+
+## Non Active Customer Breakdown
+
+## Trends
+
+## Demographics 
+
+## Recomendations to lower churn
+
+
+
+
+
+
+
+
+
+
