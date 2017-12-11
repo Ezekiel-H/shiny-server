@@ -271,7 +271,7 @@ saveRDS(Graph, "Graph3.RDS")
 highchart() %>%
   hc_xAxis(plotBands = list(
              list(from = 36, to = 58, color = "rgba(100, 0, 0, 0.1)",
-                  label = list(text = "This is a plotBand")))) %>% 
+                  label = list(text = "Long term average")))) %>% 
   hc_add_series(density(Graph$age), type = "area", name = "Age Distribution") %>%
   # hc_add_series(density(Graph2$age), type = "area", name = "Male Age Distribution") %>%
   hc_tooltip(crosshairs = TRUE, pointFormat = "<br> <b>{point.x:.0f} Years old</b>  <br> {point.y:.2f}%")
@@ -358,5 +358,428 @@ highchart()
 ```
 
 
+```{r}
+
+#filter(title %in% c("Digital Pack - 7 Day Access" ,"Digital Pack - Only £1 for 1 Month")) %>%
+
+Graph <- as.data.frame(
+  Data %>% 
+  select(age) %>%
+  na.omit()
+)
+
+Graph2 <- as.data.frame(
+  Data %>%
+  filter(title =="Digital Pack - 7 Day Access") %>%
+  select(age) %>%
+  na.omit()
+)
+
+
+Graph3 <- as.data.frame(
+  Data %>%
+  filter(title =="Digital Pack - Only £1 for 1 Month") %>%
+  select(age) %>%
+  na.omit()
+)
+
+saveRDS(Graph, "Graph5.RDS")
+saveRDS(Graph2, "Graph6.RDS")
+saveRDS(Graph3, "Graph7.RDS")
+
+
+# Graph2 <- as.data.frame(
+#   Data %>% 
+#   filter(gender == "M") %>%
+#   select(age) %>%
+#   na.omit()
+# )
+
+
+highchart() %>%
+  hc_xAxis(plotBands = list(
+             list(from = 36, to = 58, color = "rgba(100, 0, 0, 0.1)",
+                  label = list(text = "Long term average")))) %>% 
+  hc_add_series(density(Graph$age), type = "area", name = "Age Distribution") %>%
+  hc_add_series(density(Graph2$age), type = "area", name = "7 Day") %>%
+  hc_add_series(density(Graph3$age), type = "area", name = "£1 for 1 Month") %>%
+  # hc_add_series(density(Graph2$age), type = "area", name = "Male Age Distribution") %>%
+  hc_tooltip(crosshairs = TRUE, pointFormat = "<br> <b>{point.x:.0f} Years old</b>  <br> {point.y:.2f}%")
+
+
+
+
+
+
+
+
+
+```
+
+
+
+```{r}
+
+
+Graph <- Data %>% group_by(gender) %>%
+  summarise (n = n()) %>%
+  mutate(freq = n / sum(n)) %>%
+  select(-n)
+
+Graph2 <- Data %>% 
+  filter(title =="Digital Pack - 7 Day Access") %>% 
+  group_by(gender) %>%
+  summarise (n = n()) %>%
+  mutate(`7 Day` = n / sum(n)) %>%
+  select(-n)
+
+Graph3 <- Data %>% 
+  filter(title =="Digital Pack - Only £1 for 1 Month") %>%
+  group_by(gender) %>%
+  summarise (n = n()) %>%
+  mutate(`1 Month` = n / sum(n)) %>%
+  select(-n)
+
+
+Graph <- left_join(Graph, Graph2)
+Graph <- left_join(Graph, Graph3)
+
+#DatesMelt <- melt(Dates, id.vars = "DateBase", measure.vars = c("cumsum(Start)", "cumsum(End)"))
+
+
+#Graph <- melt(Graph, id.vars = "gender")
+# 
+# highchart() %>%
+#     hc_xAxis(categories = Graph$gender) %>%
+#     hc_add_series(data = Graph, type = "bar", name = "Age Distribution") %>%
+#     hc_plotOptions(series = list(stacking = "percent")) %>%
+#     hc_yAxis(title = list(text = "Percentage")) %>%
+#     hc_legend(reversed = TRUE)
+
+
+
+saveRDS(Graph, "Graph8.RDS")
+saveRDS(Graph2, "Graph9.RDS")
+saveRDS(Graph3, "Graph10.RDS")
+
+
+
+
+hc_opts <- list()
+hc_opts$chart <- list(type = "bar")
+hc_opts$title <- list(title = "Stacked bar")
+hc_opts$xAxis <- list(categories = c("F", "M", "U"))
+hc_opts$yAxis <- list(min = 0, title = list(text = 'Gender breakdown by product'))
+hc_opts$legend <- list(reversed = TRUE)
+hc_opts$series <- list(list(name = "Population", data = Graph$freq),
+                       list(name = "`7 Day`", data = Graph2$`7 Day`),
+                       list(name = "`1 Month`", data = Graph3$`1 Month`))
+# hc_opts$plotOptions <- list(series = list(stacking = "Percentage"))
+
+
+highchart(hc_opts) %>%
+    hc_tooltip(enabled = TRUE, shared = TRUE, crosshairs = TRUE, pointFormat = "<br> <b>{series.name}</b>  <br> {point.y:.2f}%") %>%
+  hc_title(text = "Gender comparison")
+
+
+
+```
+
+```{r}
+
+
+
+
+
+
+
+
+Dates2 <- as.data.frame(Data %>%  group_by(contract_end_date, `Contract Status Grouped`) %>%
+  count(contract_end_date))
+names(Dates2) <- c('DateBase', 'Status', 'End')
+
+
+Dates <- left_join(dateset, Dates2)
+
+Dates[is.na(Dates)] <- 0
+
+
+#Active <- Dates %>% filter(Status == "Active")
+
+
+Dates <- Dates %>% group_by(month(DateBase), year(DateBase)) %>%
+  mutate(mean(End))
+
+#DatesMelt <- melt(Dates, id.vars = "DateBase", measure.vars = c("cumsum(Start)", "cumsum(End)"))
+
+# 
+#   
+# hc1 <- highchart() %>%
+#   hc_xAxis(categories = Active$DateBase) %>%
+#   hc_add_series(name = "Tokyo", Active = Active$Start, type = "area") %>%
+#   hc_add_series(name = "ABC", Active = Active$End,type = "area") %>%
+#    hc_plotOptions(column = list(
+#     dataLabels = list(enabled = FALSE),
+#     stacking = "normal",
+#     enableMouseTracking = TRUE)
+#   ) 
+# 
+# 
+# hc1
+# 
+# 
+
+Graph <- as.data.frame(
+  Dates %>% filter(DateBase > "2015-1-1" & DateBase < "2017-12-31"))
+names(Graph) <- c('DateBase', 'Status', 'End', 'Month', "Year", 'Weighted Average')
+
+#saveRDS(Graph, "Graph11.RDS")
+
+  
+hc1 <- highchart() %>%
+  #hc_xAxis(categories = Graph$DateBase, type = 'datetime',labels = list(format = '{value:%Y %m}')) %>% 
+  hc_xAxis(categories = Graph$DateBase, type = 'datetime',labels = list(format = '{value:%Y %m}')) %>%
+  hc_add_series(name = "Non Active Users", data = Graph$End ,type = "line") %>%
+  hc_add_series(name = "Non Active Users Group by Month", data = Graph$`Weighted Average` ,type = "area") %>%
+  hc_tooltip(sort = TRUE, table = TRUE, valueDecimals = 2) %>%
+  hc_plotOptions(column = list(
+    dataLabels = list(enabled = FALSE),
+    stacking = "normal",
+    enableMouseTracking = TRUE)
+  ) 
+
+
+hc1
+
+
+
+
+
+
+Dates2 <- as.data.frame(Data %>%  group_by(contract_end_date, `Contract Status Grouped`) %>%
+  count(contract_end_date))
+names(Dates2) <- c('DateBase', 'Status', 'End')
+
+
+Dates <- left_join(dateset, Dates2)
+
+Dates[is.na(Dates)] <- 0
+
+
+Terminated <- Dates %>% filter(Status == "Terminated")
+Cancelled <- Dates %>% filter(Status == "Cancelled")
+
+
+Terminated <- Terminated %>% group_by(month(DateBase), year(DateBase)) %>%
+  mutate(mean(End))
+
+Terminated <- as.data.frame(
+  Terminated %>% filter(DateBase > "2015-1-1" & DateBase < "2017-12-31")) %>% select(-Status)
+names(Terminated) <- c('DateBase', 'End', 'Month', "Year", 'Terminated Average')
+
+
+
+Cancelled <- Cancelled %>% group_by(month(DateBase), year(DateBase)) %>%
+  mutate(mean(End))
+
+Cancelled <- as.data.frame(
+  Cancelled %>% filter(DateBase > "2015-1-1" & DateBase < "2017-12-31")) %>% select(-Status)
+names(Cancelled) <- c('DateBase', 'End', 'Month', "Year", 'Cancelled Average')
+
+x <- left_join(dateset, Cancelled)
+x <- left_join(x, Terminated, by = c("DateBase", "Month", "Year")) %>% 
+  filter(DateBase > "2015-1-1" & DateBase < "2017-12-31") %>% 
+  select(-c(End.x, End.y))
+
+saveRDS(x, "Graph12.RDS")
+
+hc2 <- highchart() %>%
+        #hc_xAxis(categories = Graph$DateBase, type = 'datetime',labels = list(format = '{value:%Y %m}')) %>% 
+        hc_xAxis(categories = x$DateBase, type = 'datetime',labels = list(format = '{value:%B %Y}')
+                 , plotBands = list(
+                   list(from =c(100,200,300), to = c(150, 250, 313), color = "rgba(100, 0, 0, 0.1)",
+                        label = list(text = "Long term average")))
+                 #, 
+                 #labels = list(format = '{value:%Y %M}')) %>%
+        ) %>%
+        hc_add_series(name = "Cancelled Users Group by Month", data = x$`Cancelled Average` ,type = "area") %>%
+        hc_add_series(name = "Terminated Users Group by Month", data = x$`Terminated Average` ,type = "area") %>%
+        hc_tooltip(sort = TRUE, table = TRUE, valueDecimals = 2,pointFormat = "<br><b>{series.name}</b>  <br> {point.y:.2f} lost subscribers") %>%
+  hc_title(text = "Breakdown")%>%
+        hc_plotOptions(column = list(
+          dataLabels = list(enabled = FALSE),
+          stacking = "normal",
+          enableMouseTracking = TRUE)
+    )
+
+
+#saveRDS(x, "Graph12.RDS")
+
+hc2
+
+
+
+```
+
+
+
+
+```{r}
+
+
+
+
+Graph <- as.data.frame(
+  Data %>% 
+  select(age) %>%
+  na.omit()
+)
+
+Graph2 <- as.data.frame(
+  Data %>%
+  filter(`Contract Status Grouped`=="Cancelled") %>% 
+  select(age) %>%
+  na.omit()
+)
+
+
+Graph3 <- as.data.frame(
+  Data %>%
+  filter(`Contract Status Grouped`=="Terminated") %>%
+  select(age) %>%
+  na.omit()
+)
+# 
+# saveRDS(Graph, "Graph5.RDS")
+# saveRDS(Graph2, "Graph6.RDS")
+# saveRDS(Graph3, "Graph7.RDS")
+
+
+# Graph2 <- as.data.frame(
+#   Data %>% 
+#   filter(gender == "M") %>%
+#   select(age) %>%
+#   na.omit()
+# )
+
+
+x <- highchart() %>%
+      hc_xAxis(plotBands = list(
+                 list(from = 36, to = 58, color = "rgba(100, 0, 0, 0.1)",
+                      label = list(text = "Long term average")))) %>% 
+      hc_add_series(density(Graph$age), type = "area", name = "Age Distribution") %>%
+      hc_add_series(density(Graph2$age), type = "area", name = "Cancelled") %>%
+      hc_add_series(density(Graph3$age), type = "area", name = "Terminated") %>%
+      # hc_add_series(density(Graph2$age), type = "area", name = "Male Age Distribution") %>%
+      hc_tooltip(crosshairs = TRUE, pointFormat = "<br> <b>{point.x:.0f} Years old</b>  <br> {point.y:.2f}%")
+
+
+saveRDS(x, "Graph14.RDS")
+
+
+x
+
+
+
+```
+
+
+```{r}
+
+
+Graph <- Data %>% group_by(gender) %>%
+  summarise (n = n()) %>%
+  mutate(freq = n / sum(n)) %>%
+  select(-n)
+
+Graph2 <- Data %>% 
+  filter(`Contract Status Grouped`=="Cancelled") %>% 
+  group_by(gender) %>%
+  summarise (n = n()) %>%
+  mutate(`7 Day` = n / sum(n)) %>%
+  select(-n)
+
+Graph3 <- Data %>% 
+filter(`Contract Status Grouped`=="Terminated") %>%
+  group_by(gender) %>%
+  summarise (n = n()) %>%
+  mutate(`1 Month` = n / sum(n)) %>%
+  select(-n)
+
+
+Graph <- left_join(Graph, Graph2)
+Graph <- left_join(Graph, Graph3)
+
+#DatesMelt <- melt(Dates, id.vars = "DateBase", measure.vars = c("cumsum(Start)", "cumsum(End)"))
+
+
+#Graph <- melt(Graph, id.vars = "gender")
+# 
+# highchart() %>%
+#     hc_xAxis(categories = Graph$gender) %>%
+#     hc_add_series(data = Graph, type = "bar", name = "Age Distribution") %>%
+#     hc_plotOptions(series = list(stacking = "percent")) %>%
+#     hc_yAxis(title = list(text = "Percentage")) %>%
+#     hc_legend(reversed = TRUE)
+
+
+
+saveRDS(hc_opts, "Graph13.RDS")
+# saveRDS(Graph2, "Graph14.RDS")
+# saveRDS(Graph3, "Graph15.RDS")
+
+
+
+
+hc_opts <- list()
+hc_opts$chart <- list(type = "bar")
+hc_opts$title <- list(title = "Stacked bar")
+hc_opts$xAxis <- list(categories = c("F", "M", "U"))
+hc_opts$yAxis <- list(min = 0, title = list(text = 'Gender breakdown by Non Active User'))
+hc_opts$legend <- list(reversed = TRUE)
+hc_opts$series <- list(list(name = "Population", data = Graph$freq),
+                       list(name = "Terminated", data = Graph2$`7 Day`),
+                       list(name = "Cancelled", data = Graph3$`1 Month`))
+# hc_opts$plotOptions <- list(series = list(stacking = "Percentage"))
+
+
+highchart(hc_opts) %>%
+    hc_tooltip(enabled = TRUE, shared = TRUE, crosshairs = TRUE, pointFormat = "<br> <b>{series.name}</b>  <br> {point.y:.2f}%") %>%
+  hc_title(text = "Gender comparison")
+
+
+
+```
+
+
+```{r}
+
+
+x <- as.data.frame(Data %>% group_by(`Contract Status Grouped`, contract_start_date, contract_end_date) %>%
+  filter(`Contract Status Grouped` != "Active") %>%
+  filter(contract_end_date<'2017-1-1') %>%
+  #mutate(Duration = contract_end_date - contract_start_date) %>%
+  mutate(Duration = as.numeric(contract_end_date - contract_start_date))%>%
+  mutate(YearMonth = format(as.Date(contract_start_date), "%Y-%m")) %>%
+  group_by(YearMonth) %>%
+  summarise(Num = mean(Duration)) %>%
+    filter(YearMonth>'2015-01' & YearMonth<'2017-01' )
+)
+
+saveRDS(x, "Graph15.RDS")
+
+
+highchart() %>%
+  hc_xAxis(categories = x$YearMonth) %>%
+    hc_add_series(name = "Total Users", data = x$Num, type = "line") %>%
+    hc_tooltip(sort = TRUE, table = TRUE, valueDecimals = 2) %>%
+    hc_plotOptions(column = list(
+      dataLabels = list(enabled = FALSE),
+      stacking = "normal",
+      enableMouseTracking = TRUE)
+    ) 
+  
+
+```
 
 
