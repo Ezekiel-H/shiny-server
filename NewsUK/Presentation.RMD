@@ -14,6 +14,20 @@ library(dplyr)
 
 ## Introduction to the dataset
 
+The marketing teams are challenged to grow the subscriber base, with the retention team keen to understand the current customer base and trends in order to help inform future retention or acquisition strategies.
+ 
+The data presented on is all live subscriptions over 2015 and 2016 (as of Feb 2017)
+
+- Data Quality issues
+  - Customer Status != Subscription Dates
+  - Missing data: - Retention success
+                  - Customer key
+
+The presentaion is broken into three broad catagories, 
+- Introducing the data and establishing "Active Customer" demographics
+- Looking closely at the products 
+- Unpacking the trends for non active users
+
 
 ## Active users 2015 - today
 ```{r}
@@ -108,17 +122,168 @@ highchart() %>%
 <iframe class="chart" src="https://ezekiel.nz/shiny/Widgets/Presentation/NewsUK_snakey2.html" style="border: none;"></iframe>
 
 ## checking demographics
+```{r}
+Graph <- readRDS("Graph5.RDS")
+Graph2 <- readRDS("Graph6.RDS")
+Graph3 <- readRDS("Graph7.RDS")
+
+highchart() %>%
+  hc_xAxis(plotBands = list(
+             list(from = 36, to = 58, color = "rgba(100, 0, 0, 0.1)",
+                  label = list(text = "Core Demographic")))) %>% 
+  hc_add_series(density(Graph$age), type = "area", name = "Age Distribution") %>%
+  hc_add_series(density(Graph2$age), type = "area", name = "7 Day") %>%
+  hc_add_series(density(Graph3$age), type = "area", name = "£1 for 1 Month") %>%
+  # hc_add_series(density(Graph2$age), type = "area", name = "Male Age Distribution") %>%
+  hc_tooltip(crosshairs = TRUE, pointFormat = "<br> <b>{point.x:.0f} Years old</b>  <br> {point.y:.2f}%")
+
+
+```
+
+## checking demographics
+```{r}
+Graph <- readRDS("Graph8.RDS")
+Graph2 <- readRDS("Graph9.RDS")
+Graph3 <- readRDS("Graph10.RDS")
+
+
+hc_opts <- list()
+hc_opts$chart <- list(type = "bar")
+hc_opts$title <- list(title = "Stacked bar")
+hc_opts$xAxis <- list(categories = c("F", "M", "U"))
+hc_opts$yAxis <- list(min = 0, title = list(text = 'Gender breakdown by product'))
+hc_opts$legend <- list(reversed = TRUE)
+hc_opts$series <- list(list(name = "Population", data = Graph$freq),
+                       list(name = "`7 Day`", data = Graph2$`7 Day`),
+                       list(name = "`1 Month`", data = Graph3$`1 Month`))
+# hc_opts$plotOptions <- list(series = list(stacking = "Percentage"))
+
+
+highchart(hc_opts) %>%
+    hc_tooltip(enabled = TRUE, shared = TRUE, crosshairs = TRUE, pointFormat = "<br> <b>{series.name}</b>  <br> {point.y:.2f}%") %>%
+  hc_title(text = "Gender comparison")
+
+
+```
 
 
 ## Conclusion
 
+£1 for 1 Month
+7 Day
+
 ## Non Active Customer Breakdown
 
-## Trends
+```{r}
+
+Graph <- readRDS("Graph11.RDS")
+
+  
+hc1 <- highchart() %>%
+  #hc_xAxis(categories = Graph$DateBase, type = 'datetime',labels = list(format = '{value:%Y %m}')) %>% 
+  hc_xAxis(categories = Graph$DateBase, type = 'datetime',labels = list(format = '{value:%Y %m}')) %>%
+  hc_add_series(name = "Non Active Users", data = Graph$End ,type = "line") %>%
+  hc_add_series(name = "Non Active Users Group by Month", data = Graph$`Weighted Average` ,type = "area") %>%
+  hc_tooltip(sort = TRUE, table = TRUE, valueDecimals = 2) %>%
+  hc_plotOptions(column = list(
+    dataLabels = list(enabled = FALSE),
+    stacking = "normal",
+    enableMouseTracking = TRUE)
+  ) 
+
+
+hc1
+
+
+```
+
+
+## Trends of the non active user over time
+
+```{r}
+
+x <- readRDS("Graph12.RDS")
+
+
+hc2 <- highchart() %>%
+        #hc_xAxis(categories = Graph$DateBase, type = 'datetime',labels = list(format = '{value:%Y %m}')) %>% 
+        hc_xAxis(categories = x$DateBase, type = 'datetime',labels = list(format = '{value:%B %Y}')
+                 , plotBands = list(
+                   list(from =c(100,200,300), to = c(150, 250, 313), color = "rgba(100, 0, 0, 0.1)",
+                        label = list(text = "Long term average")))
+                 #, 
+                 #labels = list(format = '{value:%Y %M}')) %>%
+        ) %>%
+        hc_add_series(name = "Cancelled Users Group by Month", data = x$`Cancelled Average` ,type = "area") %>%
+        hc_add_series(name = "Terminated Users Group by Month", data = x$`Terminated Average` ,type = "area") %>%
+        hc_tooltip(sort = TRUE, table = TRUE, valueDecimals = 2,pointFormat = "<br><b>{series.name}</b>  <br> {point.y:.2f} lost subscribers") %>%
+  hc_title(text = "Breakdown")%>%
+        hc_plotOptions(column = list(
+          dataLabels = list(enabled = FALSE),
+          stacking = "normal",
+          enableMouseTracking = TRUE)
+    )
+
+hc2
+
+```
+
 
 ## Demographics 
 
+```{r}
+
+hc_opts <- readRDS("Graph13.RDS")
+
+
+highchart(hc_opts) %>%
+    hc_tooltip(enabled = TRUE, shared = TRUE, crosshairs = TRUE, pointFormat = "<br> <b>{series.name}</b>  <br> {point.y:.2f}%") %>%
+  hc_title(text = "Gender comparison")
+
+
+
+```
+
+##
+
+```{r}
+
+x <- readRDS("Graph14.RDS")
+
+x
+
+
+```
+
+## Proxy measure of success
+
+```{r}
+
+x <- readRDS("Graph15.RDS")
+
+highchart() %>%
+  hc_xAxis(categories = x$YearMonth) %>%
+    hc_add_series(name = "Total Users", data = x$Num, type = "line") %>%
+    hc_tooltip(sort = TRUE, table = TRUE, valueDecimals = 2) %>%
+    hc_plotOptions(column = list(
+      dataLabels = list(enabled = FALSE),
+      stacking = "normal",
+      enableMouseTracking = TRUE)
+    ) 
+ 
+
+
+```
+
 ## Recomendations to lower churn
+
+
+- Establish KPI's reflective of brand goals 
+  - Aquasition of younger more female audience
+  - metrics to measure success 
+  - data to see why they might be leaving customer profiling
+  
+- Recomendations focus on the customer "call center"" cancelations explore what happend in October and November
 
 
 
